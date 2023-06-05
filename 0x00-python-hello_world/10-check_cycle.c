@@ -1,10 +1,9 @@
-#include <stdlib.h>
 #include "lists.h"
 
 /**
-* check_cycle - A function that checks if list has cycle
-* @list: pointer to list to check
-* Return: 1 on success
+* check_cycle - function that checks if list has cycle
+* @list: pointer to check
+* Return: On success 1
 */
 int check_cycle(listint_t *list)
 {
