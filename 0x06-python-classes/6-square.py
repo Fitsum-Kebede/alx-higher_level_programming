@@ -1,9 +1,12 @@
 #!/usr/bin/python3
+"""class Square that defines a square"""
 
 
 class Square:
+    """class Square that defines a square"""
 
     def __init__(self, size=0, position=(0, 0)):
+        """Instantiation with optional size and position"""
         if not type(size) is int:
             raise TypeError("size must be an integer")
         elif size < 0:
@@ -20,24 +23,30 @@ class Square:
 
     @property
     def size(self):
+        """property to retrieve it"""
         return self.__size
 
     @size.setter
     def size(self, value):
+        """property setter to set it"""
         self.__size = value
 
     @property
     def position(self):
+        """property to retrieve it"""
         return self.__position
 
     @position.setter
-    def position(self, value)
+    def position(self, value):
+        """property setter to set it"""
         self.__position = value
 
     def area(self):
+        """Public instance that returns the  square area"""
         return self.__size * self.__size
 
     def my_print(self):
+        """Public instance that prints the square with the char #"""
         if self.__size == 0:
             print("")
             return
