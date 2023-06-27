@@ -1,3 +1,8 @@
 #!/usr/bin/python3
+
+"""ass Square that defines a square"""
+
+
 class Square:
-	pass
+    """empty class Square that defines a square"""
+    pass
