@@ -1,106 +1,123 @@
+===========================
+How to Use 0-add_integer.py
+===========================
 
-The ``0-add_integer`` module
-======================
+This module defines an integer addition function ``add_integer(a, b=98)``.
 
-Using ``add_integer``
--------------------
-This is a test document based on 0-add_integer.py
-Each '>>' line is run as if in a python shell, and counts as a test.
-The next line, if not '>>' is the expected output of the previous line.
-If anything doesn't match exactly (including trailing spaces), the test fails.
+Usage
+=====
 
-Import function:
-        >>> add_integer = __import__('0-add_integer').add_integer
+``add_integer(...)``` returns the addition of the two arguments. For numbers,
+that value is equivalent to using the ``+`` operator.
 
-Test: a and b integers
-        >>> add_integer(1, 2)
-        3
+::
 
-Test: a and b integers with a negative value
-        >>> add_integer(100, -2)
-        98
+    >>> add_integer = __import__('0-add_integer').add_integer
+    >>> add_integer(2, 3)
+    5
 
-Test: a and be negative integers
-        >>> add_integer(-2, -2)
-        -4
+::
 
-Test: only a as positive integer
-        >>> add_integer(2)
-        100
+    >>> add_integer(2, -3)
+    -1
 
-Test: only a as negative integer
-        >>> add_integer(-2)
-        96
+The function also works with floating-point values.
 
-Test: a as a float, b as a negative integer
-        >>> add_integer(100.3, -2)
-        98
+::
 
-Test: a as positive integer, b as float
-        >>> add_integer(2, 100.3)
-        102
+    >>> add_integer(2.0, 3.0)
+    5
 
-Test: only a as float
-        >>> add_integer(100.3)
-        198
+Note that floats are casted to integers before addition.
 
-Test: a as exponential, b as positive integer
-        >>> add_integer(1e100, 2)
-        10000000000000000159028911097599180468360808563945281389781327557747838772170381060813469985856815106
+::
 
-Test: a as positive integer, b as exponential
-        >>> add_integer(2, 1e100)
-        10000000000000000159028911097599180468360808563945281389781327557747838772170381060813469985856815106
+    >>> add_integer(2.9, 0.2)
+    2
 
-Test: a and b as exponentials
-        >>> add_integer(1e100, 1e100)
-        20000000000000000318057822195198360936721617127890562779562655115495677544340762121626939971713630208
+::
 
-Test: no arguments passed
-        >>> add_integer()
-        Traceback (most recent call last):
-        ...
-        TypeError: add_integer() missing 1 required positional argument: 'a'
+    >>> add_integer(-2.9, -0.2)
+    -2
 
-Test: 'None' passed
-        >>> add_integer(None)
-        Traceback (most recent call last):
-        ...
-        TypeError: a must be an integer
+Floating and non-floating point values can be combined.
 
-Test: a as variable, b as positive integer
-        >>> add_integer(a, 4)
-        Traceback (most recent call last):
-        ...
-        NameError: name 'a' is not defined
+::
 
-Test: a as positive integer, b as variable
-        >>> add_integer(4, a)
-        Traceback (most recent call last):
-        ...
-        NameError: name 'a' is not defined
+    >>> add_integer(2.3, -3)
+    -1
 
-Test: a and b as variables
-        >>> add_integer(a, a)
-        Traceback (most recent call last):
-        ...
-        NameError: name 'a' is not defined
+The second argument is optional - by default, it is 98.
 
-Test: only a as variable
-        >>> add_integer(a)
-        Traceback (most recent call last):
-        ...
-        NameError: name 'a' is not defined
+::
 
-Test: a as symbol, b as positive integer
-        >>> add_integer(*, 4)
-        Traceback (most recent call last):
-        ...
-        SyntaxError: invalid syntax
+    >>> add_integer(2)
+    100
 
-Test: a as positive integer, b as symbol
-        >>> add_integer(4, *)
-        Traceback (most recent call last):
-        ...
-        SyntaxError: invalid syntax
+Non-Numbers
+===========
 
+``add_integer()`` expects that both arguments are either integers or floats.
+If either argument is a non-integer and non-float, a TypeError is raised:
+
+::
+
+    >>> add_integer("hello", 3)
+    Traceback (most recent call last):
+    TypeError: a must be an integer
+
+::
+
+    >>> add_integer(2, "hello")
+    Traceback (most recent call last):
+    TypeError: b must be an integer
+
+::
+
+    >>> add_integer(None)
+    Traceback (most recent call last):
+    TypeError: a must be an integer
+
+::
+
+    >>> add_integer(2.3, None)
+    Traceback (most recent call last):
+    TypeError: b must be an integer
+
+If both arguments are non-integers and non-floats, a TypeError message is only
+printed for the first argument.
+
+::
+
+    >>> add_integer("hello", "there")
+    Traceback (most recent call last):
+    TypeError: a must be an integer
+
+The function will fail if infinity is provided.
+
+::
+
+    >>> add_integer(float('inf'))
+    Traceback (most recent call last):
+    OverflowError: cannot convert float infinity to integer
+     
+
+::
+
+    >>> add_integer(2, float('inf'))
+    Traceback (most recent call last):
+    OverflowError: cannot convert float infinity to integer
+
+And again with NaN numbers.
+
+::
+
+    >>> add_integer(float('nan'))
+    Traceback (most recent call last):
+    ValueError: cannot convert float NaN to integer
+
+::
+
+    >>> add_integer(2, float('nan'))
+    Traceback (most recent call last):
+    ValueError: cannot convert float NaN to integer
