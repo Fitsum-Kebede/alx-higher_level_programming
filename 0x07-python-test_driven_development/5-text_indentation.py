@@ -1,40 +1,29 @@
 #!/usr/bin/python3
-"""
-Module that defines function that prints a text
-with 2 new lines after each of these characters: ., ? and :.
-There should be no space at the beginning or at the end of each printed line
-"""
+"""Defines a text-indentation function."""
 
 
 def text_indentation(text):
+    """Print text with two new lines after each '.', '?', and ':'.
+
+    Args:
+        text (string): The text to print.
+    Raises:
+        TypeError: If text is not a string.
     """
-    text must be a string.
-    function that prints a text with 2 new lines after ., ? and :."""
+    if not isinstance(text, str):
+        raise TypeError("text must be a string")
 
-    if type(text) is not str:
-        raise TypeError('text must be a string')
+    c = 0
+    while c < len(text) and text[c] == ' ':
+        c += 1
 
-    l = len(text)
-    i = 0
-    if text[0] == " ":
-        while text[i] == " ":
-            i += 1
-    while i < l:
-        if text[i] == " " and text[i - 1] == ".":
-            while text[i] == " ":
-                i += 1
-        if text[i] == " " and text[i - 1] == "?":
-            while text[i] == " ":
-                i += 1
-        if text[i] == " " and text[i - 1] == ":":
-            while text[i] == " ":
-                i += 1
-        if text[i] == " " and text[i - 1] == "\n":
-            while text[i] == " ":
-                i += 1
-        if text[i] == "." or text[i] == "?" or text[i] == ":":
-            print("{}".format(text[i]))
-            print("")
-        else:
-            print("{}".format(text[i]), end="")
-        i += 1
+    while c < len(text):
+        print(text[c], end="")
+        if text[c] == "\n" or text[c] in ".?:":
+            if text[c] in ".?:":
+                print("\n")
+            c += 1
+            while c < len(text) and text[c] == ' ':
+                c += 1
+            continue
+        c += 1
